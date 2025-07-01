@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'MVVM Theme App',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           initialBinding: InitialBinding(),
+
           getPages: AppPages.routes,
           home: Obx(() {
             final themeController = Get.find<ThemeViewModel>();
