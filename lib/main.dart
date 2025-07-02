@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'binding/initial_binding.dart';
+import 'binding/initial_binding.dart'; // ✅ Import this
 import 'core/theme/app_theme.dart';
-import 'modules/home/home_page.dart';
+import 'modules/not_found/not_found_view.dart';
 import 'modules/theme/theme_viewmodel.dart';
 import 'routes/app_pages.dart';
 
@@ -18,29 +18,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeViewModel themeController = Get.put(
+      ThemeViewModel(),
+    ); // ✅ Put here for safety (Optional)
+
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          initialBinding: InitialBinding(),
+        return Obx(() {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeController.themeMode.value,
 
-          getPages: AppPages.routes,
-          home: Obx(() {
-            final themeController = Get.find<ThemeViewModel>();
-            return Theme(
-              data:
-                  themeController.themeMode.value == ThemeMode.dark
-                      ? AppTheme.darkTheme
-                      : AppTheme.lightTheme,
-              child: HomeView(),
-            );
-          }),
-        );
+            initialBinding: InitialBinding(),
+            getPages: AppPages.routes,
+            initialRoute: '/home',
+            unknownRoute: GetPage(
+              name: '/not-found',
+              page: () => const NotFoundView(),
+            ),
+          );
+        });
       },
     );
   }

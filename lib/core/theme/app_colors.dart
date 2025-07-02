@@ -9,4 +9,6 @@ class AppColors {
   // Dark Theme Colors
   static const Color darkPrimary = Color(0xFF17252A);
   static const Color darkBackground = Color(0xFF0E0E0E);
+
+  static var errorColor=Color(0xFF0E0E0E);
 }
