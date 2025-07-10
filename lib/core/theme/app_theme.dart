@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'app_colors.dart';
 
 class AppTheme {
@@ -8,10 +9,19 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.lightBackground,
     appBarTheme: AppBarTheme(
       color: AppColors.lightPrimary,
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
+      iconTheme: const IconThemeData(color: Colors.white),
     ),
-    textTheme: TextTheme(
-      bodyMedium: TextStyle(color: Colors.black),
+    textTheme: const TextTheme(
+      bodyMedium: TextStyle(color: Colors.black87),
+      titleLarge: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.lightPrimary,
+    ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      brightness: Brightness.light, // ✅ Correct brightness
+      secondary: AppColors.lightSecondary,
     ),
   );
 
@@ -21,10 +31,19 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.darkBackground,
     appBarTheme: AppBarTheme(
       color: AppColors.darkPrimary,
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
+      iconTheme: const IconThemeData(color: Colors.white),
     ),
-    textTheme: TextTheme(
-      bodyMedium: TextStyle(color: Colors.white),
+    textTheme: const TextTheme(
+      bodyMedium: TextStyle(color: Colors.white70),
+      titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.darkSecondary,
+    ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      brightness: Brightness.dark, // ✅ Fix here
+      secondary: AppColors.darkSecondary,
     ),
   );
 }

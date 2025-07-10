@@ -1,6 +1,6 @@
 import 'package:airbnb/core/theme/app_colors.dart';
 import 'package:airbnb/core/theme_viewmodel.dart';
-import 'package:airbnb/modules/Welcome/welcome_controller.dart';
+import 'package:airbnb/viewModel/welcome/welcome_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,11 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 class WelcomeView extends StatelessWidget {
   WelcomeView({super.key});
 
-  final welcomeController = Get.find<WelcomeController>();
-  final themeController = Get.find<ThemeViewModel>();
-
   @override
   Widget build(BuildContext context) {
+    final welcomeController = Get.find<WelcomeController>();
+    final themeController = Get.find<ThemeViewModel>();
+
     bool isDarkMode = themeController.themeMode.value == ThemeMode.dark;
 
     return Obx(() {

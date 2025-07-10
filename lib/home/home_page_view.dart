@@ -1,22 +1,22 @@
+import 'package:airbnb/View/add_home/add_home_view.dart';
 import 'package:airbnb/core/theme/app_colors.dart';
 import 'package:airbnb/core/widgets/app_text.dart';
-import 'package:airbnb/modules/add_home/add_home_view.dart';
-import 'package:airbnb/modules/home/home_page_controller.dart';
+import 'package:airbnb/home/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Welcome/welcome_view.dart';
-import '../../core/theme_viewmodel.dart';
+import '../View/wlecome/welcome_view.dart';
+import '../core/theme_viewmodel.dart';
+import '../viewModel/welcome/welcome_controller.dart';
 
 class HomePageView extends StatelessWidget {
   HomePageView({super.key});
 
-  final themeController = Get.find<ThemeViewModel>();
-  final homePageController = Get.find<HomePageController>();
-
-
   @override
   Widget build(BuildContext context) {
+    Get.put(WelcomeController());
+    final themeController = Get.find<ThemeViewModel>();
+    final homePageController = Get.find<HomePageController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.lightPrimary, // Set background color
