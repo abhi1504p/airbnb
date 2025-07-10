@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Welcome/welcome_view.dart';
-import '../theme/theme_viewmodel.dart';
+import '../../core/theme_viewmodel.dart';
 
 class HomePageView extends StatelessWidget {
   HomePageView({super.key});

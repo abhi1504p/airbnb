@@ -1,5 +1,5 @@
 import 'package:airbnb/core/theme/app_colors.dart';
-import 'package:airbnb/modules/theme/theme_viewmodel.dart';
+import 'package:airbnb/core/theme_viewmodel.dart';
 import 'package:airbnb/modules/Welcome/welcome_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
