@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:airbnb/core/widgets/app_text.dart';
+import 'package:airbnb/core/theme/app_colors.dart';
 
 class AppLoader extends StatelessWidget {
   final String? message;
@@ -14,7 +16,7 @@ class AppLoader extends StatelessWidget {
           CircularProgressIndicator(),
           if (message != null) ...[
             SizedBox(height: 12),
-            Text(message!),
+            AppText.body(message!, color: AppColors.bodyColor(context)),
           ],
         ],
       ),

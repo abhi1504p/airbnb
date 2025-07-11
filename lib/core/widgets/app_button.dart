@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-
 import 'app_text.dart';
+import '../theme/app_colors.dart';
 
 /// Button style types: [filled] for solid background, [outlined] for bordered style, and [text] for text button style.
 enum ButtonType { filled, outlined, text }
@@ -30,7 +29,7 @@ class AppButton extends StatelessWidget {
   /// Text color for the filled button or for text/outlined button text.
   final Color? textColor;
 
-  /// The border radius of the button. Defaults to `12.0`.
+  /// The border radius of the button. Defaults to `32.0` for a pill shape.
   final double? borderRadius;
 
   /// Padding inside the button. Defaults vary by button type.
@@ -64,44 +63,35 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadiusValue = borderRadius ?? 12.0;
+    final borderRadiusValue = borderRadius ?? 32.0;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     // Default paddings based on button type
     final defaultPadding =
         type == ButtonType.text
-            ? const EdgeInsets.symmetric(horizontal: 2)
-            : const EdgeInsets.symmetric(vertical: 13);
+            ? const EdgeInsets.symmetric(horizontal: 12, vertical: 8)
+            : const EdgeInsets.symmetric(horizontal: 32, vertical: 14);
 
     final buttonPadding = padding ?? defaultPadding;
 
     // Determine the button content
     Widget content;
     if (text != null) {
-      content =
-          type == ButtonType.outlined
-              ? AppText.heading(
-                text!,
-                color: color ?? context.theme.primaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              )
-              : AppText(
-                text!,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color:
-                      textColor ??
-                      (type == ButtonType.text
-                          ? (color ?? context.theme.primaryColor)
-                          : Colors.white),
-                ),
-              );
+      content = AppText.heading(
+        text!,
+        color:
+            textColor ??
+            (type == ButtonType.filled
+                ? Colors.white
+                : color ?? AppColors.accent(context)),
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      );
     } else {
       content = child!;
     }
 
-    // Return styled button based on type
     switch (type) {
       case ButtonType.filled:
         return SizedBox(
@@ -110,17 +100,18 @@ class AppButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: color ?? Theme.of(context).primaryColor,
+              backgroundColor: color ?? AppColors.accent(context),
               foregroundColor: textColor ?? Colors.white,
+              elevation: 2,
               padding: buttonPadding,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadiusValue),
               ),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold),
             ),
             child: content,
           ),
         );
-
       case ButtonType.outlined:
         return SizedBox(
           height: height,
@@ -128,20 +119,20 @@ class AppButton extends StatelessWidget {
           child: OutlinedButton(
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
-              foregroundColor: color ?? Theme.of(context).primaryColor,
+              foregroundColor: color ?? AppColors.accent(context),
+              side: BorderSide(
+                color: color ?? AppColors.accent(context),
+                width: 2,
+              ),
               padding: buttonPadding,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadiusValue),
               ),
-              side: BorderSide(
-                color: color ?? Theme.of(context).primaryColor,
-                width: 1.5,
-              ),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold),
             ),
             child: content,
           ),
         );
-
       case ButtonType.text:
         return SizedBox(
           height: height,
@@ -149,13 +140,12 @@ class AppButton extends StatelessWidget {
           child: TextButton(
             onPressed: onPressed,
             style: TextButton.styleFrom(
+              foregroundColor: color ?? AppColors.accent(context),
+              padding: buttonPadding,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(borderRadiusValue),
               ),
-              padding:
-                  padding ?? EdgeInsets.symmetric(horizontal: 2, vertical: 4),
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              textStyle: const TextStyle(fontWeight: FontWeight.bold),
             ),
             child: content,
           ),

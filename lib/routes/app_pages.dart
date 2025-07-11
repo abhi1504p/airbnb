@@ -18,22 +18,29 @@ class AppPages {
       name: AppRoutes.home,
       page: () => HomePageView(),
       binding: HomePageBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: AppRoutes.addHome,
       page: () => AddHomeView(),
       binding: AddHomeBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: AppRoutes.addCard,
       page: () => AddCardPage(),
       binding: CardBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: AppRoutes.notFound,
       page: () => const NotFoundView(),
       binding: NotFoundViewBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 500),
     ),
-
   ];
 }

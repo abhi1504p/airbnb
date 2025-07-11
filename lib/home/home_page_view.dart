@@ -19,36 +19,40 @@ class HomePageView extends StatelessWidget {
     final homePageController = Get.find<HomePageController>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.lightPrimary, // Set background color
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              onPressed: () => Get.toNamed('/home'),
-              child: AppText.body('Go to Home', color: AppColors.textcolor),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        title: AppText.heading('Home', color: AppColors.headingColor(context)),
+        actions: [
+          TextButton(
+            onPressed: () => Get.toNamed('/home'),
+            child: AppText.body(
+              'Go to Home',
+              color: AppColors.bodyColor(context),
             ),
-            TextButton(
-              onPressed: () => Get.toNamed('/add_home_view'),
-              child: AppText.body('Add Home', color: AppColors.textcolor),
+          ),
+          TextButton(
+            onPressed: () => Get.toNamed('/add_home_view'),
+            child: AppText.body(
+              'Add Home',
+              color: AppColors.bodyColor(context),
             ),
-            IconButton(
+          ),
+          Obx(
+            () => IconButton(
               onPressed: () {
                 themeController.toggleTheme();
               },
-              icon: Obx(() {
-                return Icon(
-                  themeController.themeMode.value == ThemeMode.dark
-                      ? Icons.toggle_on
-                      : Icons.toggle_off,
-                  color: AppColors.textcolor,
-                  size: 32,
-                );
-              }),
+              icon: Icon(
+                themeController.themeMode.value == ThemeMode.dark
+                    ? Icons.toggle_on
+                    : Icons.toggle_off,
+                color: AppColors.bodyColor(context),
+                size: 32,
+              ),
             ),
-          ],
-        ),
-        toolbarHeight: 80, // Set custom height
-        elevation: 0, // Remove shadow if needed
+          ),
+        ],
+        toolbarHeight: 80,
+        elevation: 0,
       ),
 
       body: Obx(

@@ -4,6 +4,7 @@ import 'package:airbnb/viewModel/welcome/welcome_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:airbnb/core/widgets/app_text.dart';
 
 class WelcomeView extends StatelessWidget {
   WelcomeView({super.key});
@@ -45,23 +46,25 @@ class WelcomeView extends StatelessWidget {
               children: [
                 Icon(Icons.home, size: 48, color: AppColors.lightPrimary),
                 const SizedBox(height: 12),
-                Text(
+                AppText.heading(
                   'Welcome to Airbnb!',
-                  style: GoogleFonts.poppins(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: isDarkMode ? Colors.white : Colors.black87,
-                  ),
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color:
+                      isDarkMode
+                          ? AppColors.headingColor(context)
+                          : AppColors.headingColor(context),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                Text(
+                AppText.body(
                   'Find your perfect stay and explore the world with us.',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    color: isDarkMode ? Colors.white70 : Colors.black54,
-                  ),
+                  color:
+                      isDarkMode
+                          ? AppColors.bodyColor(context).withOpacity(0.7)
+                          : AppColors.bodyColor(context).withOpacity(0.7),
+                  fontSize: 16,
                 ),
               ],
             ),

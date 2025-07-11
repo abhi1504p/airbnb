@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../theme/app_colors.dart';
 
 /// A reusable and simplified text widget that allows easy customization.
 /// [AppText] reduces boilerplate by letting you set common [TextStyle] values
@@ -38,9 +40,9 @@ class AppText extends StatelessWidget {
     return AppText(
       text,
       key: key,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize ?? 16,
+      style: GoogleFonts.poppins(
+        color: color, // will be set in build
+        fontSize: fontSize ?? 22,
         fontWeight: fontWeight ?? FontWeight.bold,
       ),
       textAlign: textAlign,
@@ -63,9 +65,9 @@ class AppText extends StatelessWidget {
     return AppText(
       text,
       key: key,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize,
+      style: GoogleFonts.poppins(
+        color: color, // will be set in build
+        fontSize: fontSize ?? 16,
         fontWeight: fontWeight ?? FontWeight.normal,
       ),
       textAlign: textAlign,
@@ -74,13 +76,13 @@ class AppText extends StatelessWidget {
     );
   }
 
-  /// Caption or helper style (based on labelSmall or caption)
+  /// Caption style (for small, secondary text)
   factory AppText.caption(
     String text, {
     Key? key,
     Color? color,
-    double fontSize = 12,
-    FontWeight fontWeight = FontWeight.w400,
+    double? fontSize,
+    FontWeight? fontWeight,
     TextAlign? textAlign,
     int? maxLines,
     TextOverflow? overflow,
@@ -88,10 +90,10 @@ class AppText extends StatelessWidget {
     return AppText(
       text,
       key: key,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
+      style: GoogleFonts.poppins(
+        color: color, // will be set in build
+        fontSize: fontSize ?? 13,
+        fontWeight: fontWeight ?? FontWeight.w400,
       ),
       textAlign: textAlign,
       maxLines: maxLines,
@@ -101,27 +103,27 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
-    // Fallback logic for inherited styling from theme
-    final effectiveStyle =
-        style?.copyWith(
-          fontSize: style?.fontSize ?? textTheme.bodyMedium?.fontSize,
-          color: style?.color ?? textTheme.bodyMedium?.color,
-        ) ??
-        textTheme.bodyMedium;
-
-    return Material(
-      type: MaterialType.transparency,
-      child: Text(
-        text,
-        style: effectiveStyle,
-        textAlign: textAlign,
-        maxLines: maxLines,
-        overflow: overflow,
-        softWrap: softWrap,
-        textScaler: textScaleFactor ?? MediaQuery.of(context).textScaler,
-      ),
+    Color? effectiveColor = style?.color;
+    TextStyle effectiveStyle = style ?? const TextStyle();
+    if (effectiveColor == null) {
+      if (effectiveStyle.fontWeight == FontWeight.bold &&
+          (effectiveStyle.fontSize ?? 0) >= 20) {
+        effectiveColor = AppColors.headingColor(context);
+      } else if ((effectiveStyle.fontSize ?? 0) <= 14) {
+        effectiveColor = AppColors.captionColor(context);
+      } else {
+        effectiveColor = AppColors.bodyColor(context);
+      }
+      effectiveStyle = effectiveStyle.copyWith(color: effectiveColor);
+    }
+    return Text(
+      text,
+      style: effectiveStyle,
+      textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: overflow,
+      softWrap: softWrap,
+      textScaler: textScaleFactor,
     );
   }
 }
