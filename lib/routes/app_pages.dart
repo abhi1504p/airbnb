@@ -7,7 +7,7 @@ import '../View/card/add_card_view.dart';
 import '../View/notfound/not_found_view.dart';
 import '../binding/add_home_binding.dart';
 import '../binding/card_binding.dart';
-import '../binding/home_binding.dart';
+import '../binding/home_page_binding.dart';
 import '../binding/not_found_binding.dart';
 import '../home/home_page_view.dart';
 import 'app_routes.dart'; // ✅ import the route names

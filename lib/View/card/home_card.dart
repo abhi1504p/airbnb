@@ -1,4 +1,6 @@
 // HomeCard widget for CardModel
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../data/models/card/card_Model.dart';
@@ -41,7 +43,9 @@ class HomeCard extends StatelessWidget {
                     width: double.infinity,
                     height: 180,
                     child: Image.network(
-                      card.imageUrl.trim(),
+
+                      'https://example.com/chromevilla.jpg',
+
                       fit: BoxFit.cover,
                       errorBuilder:
                           (context, error, stackTrace) => Container(

@@ -1,4 +1,5 @@
 import 'package:airbnb/View/add_home/add_home_view.dart';
+import 'package:airbnb/View/favorite_list/favourite_list_view.dart';
 import 'package:airbnb/core/theme/app_colors.dart';
 import 'package:airbnb/core/widgets/app_text.dart';
 import 'package:airbnb/home/home_page_controller.dart';
@@ -23,9 +24,9 @@ class HomePageView extends StatelessWidget {
         title: AppText.heading('Home', color: AppColors.headingColor(context)),
         actions: [
           TextButton(
-            onPressed: () => Get.toNamed('/home'),
+            onPressed: () => Get.to(favourite()),
             child: AppText.body(
-              'Go to Home',
+              'Favourite',
               color: AppColors.bodyColor(context),
             ),
           ),

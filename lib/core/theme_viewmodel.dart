@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ThemeViewModel extends GetxController {
-
   Rx<ThemeMode> themeMode = ThemeMode.light.obs;
 
   bool get isDarkMode => themeMode.value == ThemeMode.dark;
@@ -13,6 +12,6 @@ class ThemeViewModel extends GetxController {
     } else {
       themeMode.value = ThemeMode.light;
     }
-    Get.changeThemeMode(themeMode.value);  // Notify GetX to apply new theme
+    Get.changeThemeMode(themeMode.value); // Notify GetX to apply new theme
   }
 }

@@ -16,6 +16,7 @@ class AddHomeController extends GetxController {
 
   Future<void> submitCard(CardModel card) async {
     final result = await CardService.submitCard(card);
+
     if (result != null) {
       addCard(result);
       Get.snackbar("Success", "Card Added");
@@ -23,4 +24,5 @@ class AddHomeController extends GetxController {
       Get.snackbar("Error", "Failed to add card");
     }
   }
+
 }
